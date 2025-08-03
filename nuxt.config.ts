@@ -1,3 +1,5 @@
+import { baseUrl } from "./app/constants/api.cons"
+import tailwindcss from "@tailwindcss/vite"
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -24,5 +26,13 @@ export default defineNuxtConfig({
         weights: ["400 900"],
       },
     ],
+  },
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  routeRules: {
+    "/api/**": {
+      proxy: baseUrl + "/api/**",
+    },
   },
 })

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <QBtn color="primary" label="تجربه ها" to="/experiences" />
-  </div>
+  <QBtn color="primary" label="تجربه ها" to="/experiences" />
 </template>
 
 <script lang="ts" setup>

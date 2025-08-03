@@ -1,4 +1,18 @@
+@import "tailwindcss";
+
 body {
   font-family: "Vazirmatn";
-  direction: rtl;
+  height: 100vh;
+  width: 100vw;
+  direction: rtl !important;
+}
+
+#__nuxt {
+  height: 100%;
+}
+
+@theme {
+  --color-bg-light: #fbfbfb;
+  --color-bg-dark: #111111;
+  --color-1: #ff7118;
 }
