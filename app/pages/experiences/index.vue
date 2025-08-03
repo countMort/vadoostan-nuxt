@@ -1,7 +1,12 @@
 <template>
   <div class="flex flex-col gap-3">
-    <template v-for="day in Object.keys(experiencesByDay || {})" :key="day">
-      <div class="font-black text-lg">{{ day }}</div>
+    <template
+      v-for="(day, i) in Object.keys(experiencesByDay || {})"
+      :key="day"
+    >
+      <div class="font-black text-lg" :class="i > 0 ? 'mt-3' : ''">
+        {{ day }}
+      </div>
       <ExperienceCard
         v-for="experience in experiencesByDay?.[day] || []"
         :key="experience.id"

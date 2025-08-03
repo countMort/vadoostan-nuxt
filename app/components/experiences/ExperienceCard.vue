@@ -15,16 +15,12 @@
           <div class="text-xs mt-1.5 flex items-center">
             محله، {{ experience.address }}
             <div class="w-1.25 h-1.25 bg-1 rounded-full mx-1.5" />
+            ساعت:
             {{
-              (() => {
-                const date = new Date(experience.date)
-                const dateStr = date.toLocaleDateString("fa-IR")
-                const timeStr = date.toLocaleTimeString("fa-IR", {
-                  hour: "numeric",
-                  minute: "numeric",
-                })
-                return `${dateStr} - ${timeStr}`
-              })()
+              new Date(experience.date).toLocaleTimeString("fa-IR", {
+                hour: "numeric",
+                minute: "numeric",
+              })
             }}
           </div>
           <div
