@@ -13,7 +13,7 @@
         <div class="font-black">{{ experience.title }}</div>
         <div class="flex w-full">
           <div class="text-xs mt-1.5 flex items-center">
-            محله، {{ experience.address }}
+            محله: {{ experience.address }}
             <div class="w-1.25 h-1.25 bg-1 rounded-full mx-1.5" />
             ساعت:
             {{
