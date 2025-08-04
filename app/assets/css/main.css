@@ -14,5 +14,6 @@ body {
 @theme {
   --color-bg-light: #fbfbfb;
   --color-bg-dark: #111111;
-  --color-1: #ff7118;
+  --color-primary: #ff7118;
+  /* --color-divider: #d4d4d6; */
 }

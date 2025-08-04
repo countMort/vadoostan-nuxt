@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-10 px-3 md:px-8 h-full text-sm">
+  <div class="h-full text-sm">
     <slot />
   </div>
 </template>

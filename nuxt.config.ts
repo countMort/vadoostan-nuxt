@@ -16,6 +16,12 @@ export default defineNuxtConfig({
   quasar: {
     plugins: ["Notify", "Dialog"],
     lang: "fa-IR",
+    config: {
+      brand: {
+        primary: "#FF7118",
+        // divider: "#D4D4D6",
+      },
+    },
   },
   fonts: {
     families: [

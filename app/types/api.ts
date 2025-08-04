@@ -1,4 +1,4 @@
-import type { Experience } from "./experiences"
+import type { DetailedExperience, Experience } from "./experiences"
 
 export type ApiResponse<T> = {
   isSuccessful: boolean
@@ -11,3 +11,5 @@ export type ExperienceListResponse = ApiResponse<{
   count: number
   exps: Experience[]
 }>
+
+export type ExperienceResponse = ApiResponse<DetailedExperience>

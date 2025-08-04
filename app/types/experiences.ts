@@ -18,3 +18,30 @@ export enum ExperienceStatus {
   CANCELLED = "cancelled",
   RUNNING = "running",
 }
+
+export interface DetailedExperience {
+  address: string
+  date: string
+  description: {
+    main: string
+    extension: string
+  }
+  directors: Director[]
+  expPhotos: string[]
+  faqs: FAQ[]
+  inclusions: string[]
+  price: number
+  title: string
+}
+
+export interface Director {
+  bio: string
+  name: string
+  photoUrl: string
+  userId: string
+}
+
+export interface FAQ {
+  question: string
+  answer: string
+}
