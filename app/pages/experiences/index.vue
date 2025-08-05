@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3 mt-10 px-3 md:px-8">
+  <div class="flex flex-col gap-3 pt-10 px-3 md:px-8">
     <template
       v-for="(day, i) in Object.keys(experiencesByDay || {})"
       :key="day"
