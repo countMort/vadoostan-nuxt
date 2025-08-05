@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     config: {
       brand: {
         primary: "#FF7118",
+        secondary: "#FAE4D7",
         // divider: "#D4D4D6",
       },
     },

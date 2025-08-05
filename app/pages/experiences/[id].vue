@@ -49,7 +49,16 @@
       {{ experience?.title }}
     </div>
     <div class="flex items-center text-sm">
-      <div>۱۲ بهمن، ساعت ۱۶:۰۰</div>
+      <div>
+        {{
+          new Date(experience?.date || "").toLocaleDateString("fa-IR", {
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          })
+        }}
+      </div>
       <DotSeperator :size="2.5" class="mx-3.5" />
       <div>{{ experience?.address }}</div>
     </div>

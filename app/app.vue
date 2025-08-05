@@ -8,7 +8,7 @@
       <Link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" /> -->
     </Head>
   </Html>
-  <Body class="bg-bg-light">
+  <Body class="bg-bg-light text-sm">
     <NuxtLayout>
       <NuxtLoadingIndicator color="var(--q-primary)" />
       <NuxtPage />

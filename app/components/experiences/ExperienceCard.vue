@@ -6,10 +6,13 @@
     <div
       class="w-15 h-15 flex items-center justify-center rounded-lg shrink-0 font-extrabold"
       :style="{
-        backgroundColor: experienceCategories[experience.category].color,
+        backgroundColor:
+          experienceCategories[experience.category]?.color || '#000',
       }"
     >
-      {{ experienceCategories[experience.category].label }}
+      {{
+        experienceCategories[experience.category]?.label || experience.category
+      }}
     </div>
     <div class="flex flex-col mr-3.5 justify-center grow">
       <div class="font-black">{{ experience.title }}</div>
