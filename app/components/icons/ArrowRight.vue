@@ -1,0 +1,23 @@
+<template>
+  <svg
+    :width="`${size / 4}rem`"
+    :height="`${size / 4}rem`"
+    viewBox="0 0 9 15"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1.00024 1L7.15024 7.15C7.19807 7.19489 7.23619 7.24911 7.26225 7.30931C7.28831 7.3695 7.30176 7.4344 7.30176 7.5C7.30176 7.5656 7.28831 7.6305 7.26225 7.69069C7.23619 7.75089 7.19807 7.80511 7.15024 7.85L1.00024 14"
+      :stroke="color"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+</template>
+<script setup lang="ts">
+const { size = 6.5, color = "#000001" } = defineProps<{
+  size?: number
+  color?: string
+}>()
+</script>
