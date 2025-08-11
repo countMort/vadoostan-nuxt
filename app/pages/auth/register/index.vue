@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col gap-3 px-10 md:px-8">
     <AppHeader title="ثبت نام" class="pb-10.5" />
-    <QForm class="flex gap-3">
+    <QForm class="flex gap-3" @submit="register">
       <QInput
-        v-model="formData.name"
+        v-model="state.formData.name"
         label="نام"
         class="min-w-40 grow !text-inherit"
         standout="bg-transparent"
@@ -13,7 +13,7 @@
         ]"
       />
       <QInput
-        v-model="formData.surname"
+        v-model="state.formData.surname"
         label="نام خانوادگی"
         standout="bg-transparent"
         class="min-w-40 grow"
@@ -23,7 +23,7 @@
         ]"
       />
       <QInput
-        v-model="formData.phone"
+        v-model="state.formData.phone"
         label="شماره تماس"
         mask="####-###-####"
         unmasked-value
@@ -39,12 +39,15 @@
           (v) => v.length === 11 || 'شماره تماس باید 11 رقم باشد.',
         ]"
       />
-      <QCheckbox
-        v-model="formData.plus18"
-        color="green-8"
+      <VCheckbox
+        v-model="state.plus18"
+        :color="state.plus18 ? 'positive' : ''"
         label="تأیید می‌کنم که حداقل ۱۸ سال سن دارم"
         class="font-semibold"
-        :class="formData.plus18 ? 'text-green-800' : ''"
+        :checkbox-props="{
+          color: 'positive',
+        }"
+        :rules="[(v) => v || '']"
       />
       <QBtn
         label="ادامه"
@@ -53,7 +56,8 @@
         color="secondary"
         rounded
         unelevated
-        @click="register"
+        type="submit"
+        :loading="state.loading"
       />
     </QForm>
   </div>
@@ -61,17 +65,29 @@
 
 <script setup lang="ts">
 import { farsiRule } from "~/constants/formRules"
-import AppHeader from "../components/layout/AppHeader.vue"
+import AppHeader from "~/components/layout/AppHeader.vue"
+import { useAuthApi } from "~/api/auth"
 defineOptions({ name: "RegisterPage" })
-const formData = reactive({
-  name: "",
-  surname: "",
-  phone: "",
-  plus18: false,
-})
+const state = useRegisterStore()
+const { sendCode } = useAuthApi()
+const router = useRouter()
 
-const register = () => {
-  console.log(formData)
+const register = async () => {
+  try {
+    state.loading = true
+    await sendCode({
+      type: "signup",
+      mobileNumber: state.formData.phone,
+      firstName: state.formData.name,
+      lastName: state.formData.surname,
+      client: "web",
+    })
+    router.push("/auth/otp")
+  } catch (error) {
+    console.log(error)
+  } finally {
+    state.loading = false
+  }
 }
 </script>
 

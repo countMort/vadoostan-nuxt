@@ -13,8 +13,8 @@
         active-color="primary"
         active-bg-color="secondary"
       >
-        <QRouteTab to="/login" exact label="ورود" />
-        <QRouteTab to="/register" exact label="ثبت نام" />
+        <QRouteTab to="/auth/login" exact label="ورود" />
+        <QRouteTab to="/auth/register" exact label="ثبت نام" />
       </QTabs>
     </QFooter>
   </QLayout>

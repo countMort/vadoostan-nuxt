@@ -1,0 +1,45 @@
+[dir="rtl"] .q-field__label {
+  @apply !right-0 !left-auto;
+}
+
+[dir="rtl"] .q-notification--standard .q-notification__actions {
+  @apply mr-2 -ml-2 pl-0;
+}
+
+.q-field--standout .q-field__control,
+.q-btn--rounded {
+  @apply rounded-2xl;
+}
+
+.q-btn,
+.q-field__control {
+  @apply min-h-15;
+}
+
+.q-checkbox__bg {
+  @apply rounded-sm;
+}
+
+.q-field--standout.q-field--highlighted .q-field__native {
+  @apply text-inherit;
+}
+
+.q-field--standout.q-field--highlighted .q-field__control {
+  @apply bg-transparent;
+}
+
+.q-field__inner div[role="alert"] {
+  @apply text-start;
+}
+
+.q-field__control .q-icon.text-negative {
+  @apply hidden;
+}
+
+[dir="rtl"] .q-notification__progress {
+  @apply -left-3.5 -right-3.5;
+}
+
+.q-field__inner .q-field__control-container {
+  @apply h-min my-auto;
+}

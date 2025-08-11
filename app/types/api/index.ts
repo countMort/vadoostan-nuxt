@@ -1,4 +1,4 @@
-import type { DetailedExperience, Experience } from "./experiences"
+import type { DetailedExperience, Experience } from "../experiences"
 
 export type ApiResponse<T> = {
   isSuccessful: boolean
