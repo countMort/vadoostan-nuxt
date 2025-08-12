@@ -26,6 +26,7 @@
         unelevated
         text-color="primary"
         class="!w-full mx-auto !font-bold !text-lg"
+        :loading="loading"
       />
     </QForm>
   </div>
@@ -42,8 +43,10 @@ const router = useRouter()
 const state = useLoginStore()
 const { sendCode } = useAuthApi()
 const otpStore = useOtpStore()
+const loading = ref(false)
 const login = async () => {
   try {
+    loading.value = true
     await sendCode({
       type: SignType.LOGIN,
       mobileNumber: state.mobileNumber,
@@ -53,6 +56,8 @@ const login = async () => {
     router.push("/auth/otp")
   } catch (error) {
     console.log(error)
+  } finally {
+    loading.value = false
   }
 }
 </script>
