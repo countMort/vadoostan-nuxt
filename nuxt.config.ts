@@ -12,25 +12,11 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/scripts",
     "nuxt-quasar-ui",
-    "@sidebase/nuxt-auth",
     "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
   ],
   pinia: {
     storesDirs: ["./stores/**", "./**/*.store.ts"],
-  },
-  auth: {
-    baseURL: `http://localhost:${process.env.PORT || 3000}/api`,
-    provider: {
-      type: "local",
-      endpoints: {
-        signIn: { path: "/auth/verify-otp", method: "post" },
-        getSession: { path: "/users/me", method: "get" },
-      },
-      token: {
-        type: "",
-        signInResponseTokenPointer: "/result/token",
-      },
-    },
   },
   quasar: {
     plugins: ["Notify", "Dialog"],

@@ -5,7 +5,7 @@
     <div
       class="text-center font-semibold mx-auto bg-bg-input rounded-lg px-2.5 py-1"
     >
-      {{ toPersianDigits(mobileNumber) }}
+      {{ toPersianDigits(loginStore.mobileNumber) }}
     </div>
     <OTP v-model="otp" />
     <div
@@ -18,8 +18,8 @@
         state.formattedTime
       }}</span>
     </div>
-    <QBtn :loading="loading" @click="verifyOtp">
-      تایید و {{ isLogin ? "ورود" : "ثبت نام" }}
+    <QBtn :loading="authStore.loading" @click="verifyOtp">
+      تایید و {{ state.signType === SignType.LOGIN ? "ورود" : "ثبت نام" }}
     </QBtn>
   </div>
 </template>
@@ -28,19 +28,24 @@
 import AppHeader from "~/components/layout/AppHeader.vue"
 import OTP from "~/components/auth/OTP.vue"
 import { useAuthApi } from "~/api/auth"
+import { SignType, type SendCodeRequest } from "~/types/api/auth"
 defineOptions({ name: "OtpPage" })
-const { mobileNumber } = useLoginStore()
+definePageMeta({ middleware: "not-authenticated" })
+const loginStore = useLoginStore()
+const registerStore = useRegisterStore()
 const state = useOtpStore()
 const otp = ref<string>("")
 const router = useRouter()
-const isLogin = computed(() => Boolean(mobileNumber))
-const { signIn } = useAuth()
-const loading = ref(false)
-const { sendCode: sendLoginCode } = useAuthApi()
+const authStore = useAuthStore()
+const { sendCode } = useAuthApi()
 const $q = useQuasar()
 
 onBeforeMount(() => {
-  if (!isLogin.value) {
+  if (
+    !state.signType ||
+    (state.signType === SignType.LOGIN && !loginStore.mobileNumber) ||
+    (state.signType === SignType.SIGNUP && !registerStore.formData.mobileNumber)
+  ) {
     router.back()
   }
 })
@@ -53,11 +58,21 @@ watch(otp, () => {
 
 const resendCode = async () => {
   try {
-    await sendLoginCode({
-      type: "login",
-      mobileNumber: mobileNumber,
-      client: "web",
-    })
+    const body: SendCodeRequest =
+      state.signType === SignType.LOGIN
+        ? {
+            type: SignType.LOGIN,
+            mobileNumber: loginStore.mobileNumber,
+            client: "web",
+          }
+        : {
+            type: SignType.SIGNUP,
+            mobileNumber: registerStore.formData.mobileNumber,
+            firstName: registerStore.formData.firstName,
+            lastName: registerStore.formData.lastName,
+            client: "web",
+          }
+    await sendCode(body)
   } catch (error) {
     console.log(error)
   }
@@ -65,12 +80,7 @@ const resendCode = async () => {
 
 const verifyOtp = async () => {
   try {
-    loading.value = true
-    await signIn({
-      mobileNumber: mobileNumber,
-      otp: otp.value,
-      client: "web",
-    })
+    await authStore.login(loginStore.mobileNumber, otp.value)
   } catch (error) {
     console.log(error)
     $q.notify({
@@ -78,8 +88,6 @@ const verifyOtp = async () => {
       color: "negative",
       progress: true,
     })
-  } finally {
-    loading.value = false
   }
 }
 </script>

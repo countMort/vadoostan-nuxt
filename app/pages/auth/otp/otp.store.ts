@@ -1,6 +1,9 @@
+import type { SignType } from "~/types/api/auth"
+
 export const useOtpStore = defineStore("otp", () => {
   const timer = ref(120)
   const intervalId = ref<ReturnType<typeof setInterval> | null>(null)
+  const signType = ref<SignType | null>(null)
 
   const startTimer = () => {
     stopTimer()
@@ -24,5 +27,5 @@ export const useOtpStore = defineStore("otp", () => {
     const seconds = timer.value % 60
     return toPersianDigits(`${minutes}:${seconds.toString().padStart(2, "0")}`)
   })
-  return { timer, startTimer, stopTimer, formattedTime, intervalId }
+  return { timer, startTimer, stopTimer, formattedTime, intervalId, signType }
 })

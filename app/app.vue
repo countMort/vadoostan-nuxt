@@ -17,6 +17,14 @@
 </template>
 
 <script lang="ts" setup>
+const authStore = useAuthStore()
+
+onMounted(() => {
+  if (authStore.token) {
+    authStore.fetchUser()
+  }
+})
+
 // const isDark = ref(false)
 // onMounted(() => {
 //   isDark.value = window.matchMedia("(prefers-color-scheme: dark)").matches

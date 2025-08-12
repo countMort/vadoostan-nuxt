@@ -1,8 +1,8 @@
 export const useRegisterStore = defineStore("register", () => {
   const formData = reactive({
-    name: "",
-    surname: "",
-    phone: "",
+    firstName: "",
+    lastName: "",
+    mobileNumber: "",
   })
   const plus18 = ref(false)
   const loading = ref(false)

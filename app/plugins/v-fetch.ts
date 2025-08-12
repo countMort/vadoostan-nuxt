@@ -1,14 +1,18 @@
 export default defineNuxtPlugin(() => {
   const $q = useQuasar()
-  const { token } = useAuth()
+  const getToken = () => useAuthStore().token
 
   const vFetch = $fetch.create({
-    headers: {
-      Authorization: token.value || "",
-    },
     onRequest({ request, options }) {
+      const token = getToken()
       if (import.meta.dev) {
-        console.log({ request, options, token: token.value })
+        console.log({ request, options, token })
+      }
+      if (token) {
+        options.headers = {
+          ...options.headers,
+          Authorization: token,
+        } as any
       }
     },
     onResponseError({ error, response }) {
