@@ -5,6 +5,7 @@ export const useAuthStore = defineStore("auth", () => {
   const token = useCookie<string | null>("token", {
     default: () => null,
     sameSite: "none",
+    secure: true,
     maxAge: 60 * 60 * 24 * 7,
   })
   const user = ref<any>(null)
