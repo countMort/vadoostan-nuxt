@@ -1,5 +1,6 @@
 import type { RouteLocationNormalizedGeneric } from "vue-router"
 import { useAuthApi } from "~/api/auth"
+import { routes } from "~/constants/routes.cons"
 
 export const useAuthStore = defineStore(
   "auth",
@@ -13,7 +14,9 @@ export const useAuthStore = defineStore(
     const token = ref<string | null>(null)
     const user = ref<any>(null)
     const loading = ref(false)
-    const redirect = ref<string | RouteLocationNormalizedGeneric>("/")
+    const redirect = ref<string | RouteLocationNormalizedGeneric>(
+      routes.experiences.list
+    )
     const error = ref<string | null>(null)
 
     const isAuthenticated = computed(() => !!token.value)
@@ -38,7 +41,7 @@ export const useAuthStore = defineStore(
         const user = await fetchUser()
         if (!user) throw new Error()
         navigateTo(redirect.value)
-        redirect.value = "/"
+        redirect.value = routes.experiences.list
       } catch (err: any) {
         error.value = err?.data?.message || err.message || "خطایی رخ داد"
         console.log("login error: ", error.value)
@@ -84,10 +87,6 @@ export const useAuthStore = defineStore(
   },
   {
     persist: {
-      storage: piniaPluginPersistedstate.cookies({
-        sameSite: "none",
-        secure: true,
-      }),
       pick: ["token", "user", "redirect"],
     },
   }

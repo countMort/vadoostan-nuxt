@@ -6,7 +6,6 @@
         v-model="state.formData.firstName"
         name="firstName"
         label="نام"
-        class="!text-inherit"
         :rules="[
           (v) => !!v || 'نام را وارد کنید',
           farsiRule('نام باید فارسی باشد.'),
@@ -25,8 +24,6 @@
         v-model="state.formData.mobileNumber"
         name="mobileNumber"
         label="شماره تماس"
-        mask="####-###-####"
-        unmasked-value
         dir="ltr"
         class="col-span-2"
         :rules="[

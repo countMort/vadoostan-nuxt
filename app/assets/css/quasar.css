@@ -6,6 +6,10 @@
   @apply mr-2 -ml-2 pl-0;
 }
 
+.q-btn {
+  @apply text-lg
+}
+
 .q-field--standout .q-field__control,
 .q-btn--rounded {
   @apply rounded-2xl;
@@ -21,7 +25,7 @@
 }
 
 .q-field--standout.q-field--highlighted .q-field__native {
-  @apply text-inherit;
+  @apply text-black;
 }
 
 .q-field--standout.q-field--highlighted .q-field__control {

@@ -6,8 +6,6 @@
         v-model="state.mobileNumber"
         label="شماره تماس"
         name="mobileNumber"
-        mask="####-###-####"
-        unmasked-value
         dir="ltr"
         class="min-w-40 grow !rounded-2xl"
         :rules="[
@@ -36,6 +34,7 @@
 import { useAuthApi } from "~/api/auth"
 import AppHeader from "~/components/layout/AppHeader.vue"
 import { SignType } from "~/types/api/auth"
+import { routes } from "~/constants/routes.cons"
 
 defineOptions({ name: "LoginPage" })
 definePageMeta({ middleware: "not-authenticated" })
@@ -53,7 +52,7 @@ const login = async () => {
       client: "web",
     })
     otpStore.signType = SignType.LOGIN
-    router.push("/auth/otp")
+    router.push(routes.auth.otp)
   } catch (error) {
     console.log(error)
   } finally {

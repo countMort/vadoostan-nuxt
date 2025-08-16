@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="`/experiences/${experience.id}`"
+    :to="routes.experiences.details(experience.id)"
     class="rounded-lg p-2 shadow-sm flex flex-row bg-white"
   >
     <div
@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import { routes } from "~/constants/routes.cons"
 import { experienceCategories } from "~/constants/experiences.cons"
 import type { Experience } from "~/types/experiences"
 

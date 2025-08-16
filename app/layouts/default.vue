@@ -5,7 +5,7 @@
         <slot />
       </QPage>
     </QPageContainer>
-    <QFooter v-if="!authStore.isAuthenticated" class="!bg-[#D9D9D9] h-15 flex">
+    <QFooter v-if="!authStore.isAuthenticated" class="!bg-disabled h-15 flex">
       <QTabs
         class="grow text-black"
         stretch
@@ -13,14 +13,20 @@
         active-color="primary"
         active-bg-color="secondary"
       >
-        <QRouteTab to="/auth/login" exact label="ورود" />
-        <QRouteTab to="/auth/register" exact label="ثبت نام" />
+        <QRouteTab :to="routes.auth.login" exact>
+          <span class="text-base font-bold">ورود</span>
+        </QRouteTab>
+        <QRouteTab :to="routes.auth.register" exact>
+          <span class="text-base font-bold">ثبت نام</span>
+        </QRouteTab>
       </QTabs>
     </QFooter>
   </QLayout>
 </template>
 
 <script setup lang="ts">
+import { routes } from "~/constants/routes.cons"
+
 defineOptions({ name: "DefaultLayout" })
 const authStore = useAuthStore()
 </script>

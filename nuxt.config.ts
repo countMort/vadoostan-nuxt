@@ -18,6 +18,14 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ["./stores/**", "./**/*.store.ts"],
   },
+  piniaPluginPersistedstate: {
+    storage: "cookies",
+    cookieOptions: {
+      sameSite: "none",
+      secure: true,
+      maxAge: 60 * 60 * 24 * 7,
+    },
+  },
   quasar: {
     plugins: ["Notify", "Dialog"],
     lang: "fa-IR",
@@ -26,7 +34,7 @@ export default defineNuxtConfig({
         primary: "#FF7118",
         secondary: "#FAE4D7",
         positive: "#15A983",
-        // divider: "#D4D4D6",
+        disabled: "#D9D9D9",
       },
       notify: {
         position: "bottom-left",
