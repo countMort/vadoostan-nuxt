@@ -6,7 +6,10 @@ export const routes = {
   },
   home: "/",
   experiences: {
-    list: "/experiences",
+    index: "/experiences",
     details: (id: string) => `/experiences/${id}`,
+  },
+  profile: {
+    index: "/profile",
   },
 }

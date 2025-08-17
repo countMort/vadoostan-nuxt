@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { routes } from "~/constants/routes.cons"
 import ArrowRight from "../icons/ArrowRight.vue"
-const { to = routes.experiences.list, title = "" } = defineProps<{
+const { to = routes.experiences.index, title = "" } = defineProps<{
   title?: string
   to?: string
 }>()

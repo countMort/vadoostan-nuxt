@@ -15,7 +15,7 @@ export const useAuthStore = defineStore(
     const user = ref<any>(null)
     const loading = ref(false)
     const redirect = ref<string | RouteLocationNormalizedGeneric>(
-      routes.experiences.list
+      routes.experiences.index
     )
     const error = ref<string | null>(null)
 
@@ -41,7 +41,7 @@ export const useAuthStore = defineStore(
         const user = await fetchUser()
         if (!user) throw new Error()
         navigateTo(redirect.value)
-        redirect.value = routes.experiences.list
+        redirect.value = routes.experiences.index
       } catch (err: any) {
         error.value = err?.data?.message || err.message || "خطایی رخ داد"
         console.log("login error: ", error.value)

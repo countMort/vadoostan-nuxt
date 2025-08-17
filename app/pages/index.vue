@@ -40,7 +40,6 @@
       </NuxtLink>
     </div>
   </div>
-  <!-- <QBtn label="تجربه ها" to="/experiences" /> -->
 </template>
 
 <script lang="ts" setup>
@@ -54,7 +53,7 @@ definePageMeta({
 
 onMounted(() => {
   if (authStore.isAuthenticated) {
-    navigateTo(routes.experiences.list)
+    navigateTo(routes.experiences.index)
   }
 })
 </script>
