@@ -1,11 +1,12 @@
 <template>
   <header class="pt-15 text-base">
     <div class="flex items-center gap-2 w-full relative">
-      <ArrowRight
-        class="absolute right-0 cursor-pointer"
-        :size="3.5"
+      <div
+        class="absolute -right-2.25 cursor-pointer rounded-full bg-bg-light w-7 h-7 flex items-center justify-center"
         @click="navigateTo(to, { replace: true })"
-      />
+      >
+        <ArrowRight :size="3.5" />
+      </div>
       <span class="mx-auto font-extrabold">{{ title }}</span>
     </div>
   </header>

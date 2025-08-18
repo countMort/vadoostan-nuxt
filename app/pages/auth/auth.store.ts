@@ -1,6 +1,7 @@
 import type { RouteLocationNormalizedGeneric } from "vue-router"
 import { useAuthApi } from "~/api/auth"
 import { routes } from "~/constants/routes.cons"
+import type { User } from "~/types/api/auth"
 
 export const useAuthStore = defineStore(
   "auth",
@@ -12,7 +13,14 @@ export const useAuthStore = defineStore(
     //   maxAge: 60 * 60 * 24 * 7,
     // })
     const token = ref<string | null>(null)
-    const user = ref<any>(null)
+    const _user = ref<User | null>(null)
+    const user = computed(() => {
+      if (!_user.value) return null
+      return {
+        ..._user.value,
+        fullName: `${_user.value?.firstName} ${_user.value?.lastName}`,
+      }
+    })
     const loading = ref(false)
     const redirect = ref<string | RouteLocationNormalizedGeneric>(
       routes.experiences.index
@@ -52,7 +60,7 @@ export const useAuthStore = defineStore(
 
     function logout() {
       clearToken()
-      user.value = null
+      _user.value = null
       navigateTo("/login")
     }
 
@@ -62,12 +70,12 @@ export const useAuthStore = defineStore(
       const { fetchUser: fetchUserApi } = useAuthApi()
       try {
         const res = await fetchUserApi()
-        user.value = res.result
+        _user.value = res.result
         return res.result
       } catch (err: any) {
         console.log("fetchUser error: ", err)
         clearToken()
-        user.value = null
+        _user.value = null
       } finally {
         loading.value = false
       }
@@ -75,6 +83,7 @@ export const useAuthStore = defineStore(
 
     return {
       token,
+      _user,
       user,
       loading,
       error,
@@ -87,7 +96,7 @@ export const useAuthStore = defineStore(
   },
   {
     persist: {
-      pick: ["token", "user", "redirect"],
+      pick: ["token", "_user", "redirect"],
     },
   }
 )

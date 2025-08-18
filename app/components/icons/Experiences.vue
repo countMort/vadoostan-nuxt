@@ -37,7 +37,7 @@
   </svg>
 </template>
 <script lang="ts" setup>
-const { size = 7.25, color = "black" } = defineProps<{
+const { size = 6.5, color = "black" } = defineProps<{
   size?: number
   color?: string
 }>()

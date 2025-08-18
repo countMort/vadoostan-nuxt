@@ -1,6 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 px-10 md:px-8">
-    <AppHeader title="تایید شماره موبایل" class="pb-9.5" />
+  <div class="flex flex-col gap-4">
     <div class="text-center font-bold text-base">کد ارسال شده را وارد کنید</div>
     <div
       class="text-center font-semibold mx-auto bg-bg-input rounded-lg px-2.5 py-1"
@@ -25,12 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import AppHeader from "~/components/layout/AppHeader.vue"
 import OTP from "~/components/auth/OTP.vue"
 import { useAuthApi } from "~/api/auth"
 import { SignType, type SendCodeRequest } from "~/types/api/auth"
 defineOptions({ name: "OtpPage" })
-definePageMeta({ middleware: "not-authenticated" })
+definePageMeta({
+  middleware: "not-authenticated",
+  appHeader: { title: "تایید شماره موبایل", class: "pb-9.5" },
+})
 const loginStore = useLoginStore()
 const registerStore = useRegisterStore()
 const state = useOtpStore()

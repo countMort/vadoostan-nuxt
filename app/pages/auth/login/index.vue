@@ -1,6 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3 px-10 md:px-8 max-w-lg mx-auto">
-    <AppHeader title="ورود" class="pb-10.5" />
+  <div class="flex flex-col gap-3">
     <QForm class="flex gap-y-1" @submit="login">
       <QInput
         v-model="state.mobileNumber"
@@ -32,12 +31,14 @@
 
 <script setup lang="ts">
 import { useAuthApi } from "~/api/auth"
-import AppHeader from "~/components/layout/AppHeader.vue"
 import { SignType } from "~/types/api/auth"
 import { routes } from "~/constants/routes.cons"
 
 defineOptions({ name: "LoginPage" })
-definePageMeta({ middleware: "not-authenticated" })
+definePageMeta({
+  middleware: "not-authenticated",
+  appHeader: { title: "ورود", class: "pb-10.5" },
+})
 const router = useRouter()
 const state = useLoginStore()
 const { sendCode } = useAuthApi()

@@ -1,6 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3 px-10 md:px-8">
-    <AppHeader title="ثبت نام" class="pb-10.5" />
+  <div class="flex flex-col gap-3">
     <QForm class="grid grid-cols-2 gap-x-3 gap-y-1" @submit="register">
       <QInput
         v-model="state.formData.firstName"
@@ -60,11 +59,13 @@
 
 <script setup lang="ts">
 import { farsiRule } from "~/constants/formRules"
-import AppHeader from "~/components/layout/AppHeader.vue"
 import { useAuthApi } from "~/api/auth"
 import { SignType } from "~/types/api/auth"
 defineOptions({ name: "RegisterPage" })
-definePageMeta({ middleware: "not-authenticated" })
+definePageMeta({
+  middleware: "not-authenticated",
+  appHeader: { title: "ثبت نام", class: "pb-10.5" },
+})
 const state = useRegisterStore()
 const { sendCode } = useAuthApi()
 const router = useRouter()

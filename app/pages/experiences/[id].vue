@@ -1,5 +1,4 @@
 <template>
-  <AppHeader class="fixed top-0 left-10 right-10 z-10" />
   <QCarousel
     v-model="slide"
     animated
@@ -126,8 +125,11 @@
 import { apiKeys, baseUrl } from "~/constants/api.cons"
 import type { ExperienceResponse } from "~/types/api"
 import ShoppingBasket from "~/components/icons/ShoppingBasket.vue"
-import AppHeader from "~/components/layout/AppHeader.vue"
 defineOptions({ name: "ExperiencePage" })
+definePageMeta({
+  middleware: "authenticated",
+  appHeader: { class: "fixed top-0 left-10 right-10 z-10" },
+})
 
 const params = useRoute().params
 const {
