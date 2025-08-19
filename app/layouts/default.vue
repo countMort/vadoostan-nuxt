@@ -1,11 +1,11 @@
 <template>
   <QLayout view="lHh lpr lFf" container class="!h-screen">
-    <QPageContainer class="px-6 max-w-lg mx-auto">
+    <QPageContainer class="px-3 max-w-lg mx-auto">
       <QPage>
         <AppHeader
           v-if="appHeader"
           :title="appHeader.title"
-          :to="appHeader.to"
+          :back-props="appHeader.backProps"
           :class="appHeader.class"
         />
         <slot />

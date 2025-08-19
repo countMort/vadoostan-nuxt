@@ -4,7 +4,7 @@
     :to="to"
   >
     <slot />
-    <span class="text-lg font-bold">{{ title }}</span>
+    <span class="font-bold">{{ title }}</span>
   </NuxtLink>
 </template>
 <script lang="ts" setup>

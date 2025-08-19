@@ -5,6 +5,7 @@
       v-for="experience in experiences"
       :key="experience.id"
       :experience="experience"
+      :to="routes.experiences.ticket(experience.id)"
     >
       <template #actions>
         <div
@@ -29,6 +30,7 @@
 import { routes } from "~/constants/routes.cons"
 import ExperienceCard from "~/components/experiences/ExperienceCard.vue"
 import { ExperienceStatus, type Experience } from "~/types/experiences"
+import { useExperiencesApi } from "~/api/experiences"
 
 defineOptions({ name: "PastExperiencesPage" })
 definePageMeta({
@@ -36,9 +38,17 @@ definePageMeta({
   appHeader: {
     title: "تجربیات گذشته",
     class: "pb-7.5",
-    to: routes.profile.index,
+    backProps: {
+      to: routes.profile.index,
+    },
   },
 })
+
+const { getUserExperiences } = useExperiencesApi()
+const { user } = useAuthStore()
+// const { data: experiences, error } = getUserExperiences({
+//   userId: user!.id,
+// })
 
 const experiences = ref<Experience[]>([
   {

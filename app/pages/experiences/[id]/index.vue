@@ -122,9 +122,9 @@
 </template>
 
 <script setup lang="ts">
-import { apiKeys, baseUrl } from "~/constants/api.cons"
-import type { ExperienceResponse } from "~/types/api"
+import { baseUrl } from "~/constants/api.cons"
 import ShoppingBasket from "~/components/icons/ShoppingBasket.vue"
+import { useExperiencesApi } from "~/api/experiences"
 defineOptions({ name: "ExperiencePage" })
 definePageMeta({
   middleware: "authenticated",
@@ -132,11 +132,10 @@ definePageMeta({
 })
 
 const params = useRoute().params
+const { getExperience } = useExperiencesApi()
 const {
   data: { value: { result: experience } = {} },
-} = await useAsyncData<ExperienceResponse>(apiKeys.experience, () =>
-  $fetch(`/api/user/experiences/${params.id}`)
-)
+} = await getExperience({ experienceId: params.id as string })
 const slide = ref(-1)
 onMounted(() => {
   slide.value = 0

@@ -1,3 +1,6 @@
+import type { FetchError } from "ofetch"
+import type { UseFetchOptions, UseFetchUrl } from "~/types/api/auth"
+
 export default defineNuxtPlugin(() => {
   const $q = useQuasar()
   const getToken = () => useAuthStore().token
@@ -5,7 +8,7 @@ export default defineNuxtPlugin(() => {
   const vFetch = $fetch.create({
     onRequest({ request, options }) {
       const token = getToken()
-      if (import.meta.dev) {
+      if (import.meta.dev && import.meta.client) {
         console.log({ request, options, token })
       }
       if (token) {
@@ -27,9 +30,9 @@ export default defineNuxtPlugin(() => {
     },
   })
 
-  const useVFetch = <R, E>(
-    url: Parameters<typeof useFetch<R, E>>[0],
-    options?: Omit<Parameters<typeof useFetch<R, E>>[1], "$fetch">
+  const useVFetch = <R = void, E = FetchError>(
+    url: UseFetchUrl<R, E>,
+    options?: Omit<UseFetchOptions<R, E>, "$fetch">
   ) => {
     return useFetch<R, E>(url, {
       $fetch: vFetch,

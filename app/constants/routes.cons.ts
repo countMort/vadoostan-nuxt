@@ -8,6 +8,7 @@ export const routes = {
   experiences: {
     index: "/experiences",
     details: (id: string) => `/experiences/${id}`,
+    ticket: (id: string) => `/experiences/${id}/ticket`,
   },
   profile: {
     index: "/profile",

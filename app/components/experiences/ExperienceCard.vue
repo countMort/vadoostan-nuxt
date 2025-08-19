@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="deactive ? undefined : routes.experiences.details(experience.id)"
+    :to="deactive ? undefined : to || routes.experiences.details(experience.id)"
     class="rounded-lg p-2 shadow-sm flex flex-row bg-white"
   >
     <div
@@ -47,8 +47,9 @@ import { experienceCategories } from "~/constants/experiences.cons"
 import type { Experience } from "~/types/experiences"
 
 defineOptions({ name: "ExperienceCard" })
-defineProps<{
+const { experience } = defineProps<{
   experience: Experience
   deactive?: boolean
+  to?: string
 }>()
 </script>

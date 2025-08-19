@@ -33,9 +33,11 @@ export default defineNuxtConfig({
       brand: {
         primary: "#FF7118",
         secondary: "#FAE4D7",
-        positive: "#15A983",
+        positive: "#22A957",
         disabled: "#F5F7F6",
         border: "#D9D9D9",
+        vblue: "#257BAF",
+        vpurple: "#7A72FF",
       },
       notify: {
         position: "bottom-left",

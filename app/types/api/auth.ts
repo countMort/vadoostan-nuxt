@@ -1,5 +1,10 @@
 import type { ApiResponse } from "."
 
+export type UseFetchUrl<R, E> = Parameters<typeof useFetch<R, E>>[0]
+export type UseFetchOptions<R, E> = NonNullable<
+  Parameters<typeof useFetch<R, E>>[1]
+>
+
 export enum SignType {
   LOGIN = "login",
   SIGNUP = "signup",
@@ -30,6 +35,7 @@ export type VerifyOtpResponse = ApiResponse<{
 }>
 
 export type User = {
+  id: string
   phoneNumber: string
   firstName: string
   lastName: string
