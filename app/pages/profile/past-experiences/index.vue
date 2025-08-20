@@ -46,9 +46,10 @@ definePageMeta({
 
 const { getUserExperiences } = useExperiencesApi()
 const { user } = useAuthStore()
-// const { data: experiences, error } = getUserExperiences({
-//   userId: user!.id,
-// })
+const { data, error } = await getUserExperiences({
+  userId: user!.userId,
+})
+console.log(data)
 
 const experiences = ref<Experience[]>([
   {

@@ -1,3 +1,4 @@
+import type { ApiResponse } from "./api/index"
 import type { experienceCategories } from "~/constants/experiences.cons"
 
 export interface Experience {
@@ -45,3 +46,8 @@ export interface FAQ {
   question: string
   answer: string
 }
+
+export type GetUserExperiencesResponse = ApiResponse<{
+  count: number
+  exps: Experience[]
+}>

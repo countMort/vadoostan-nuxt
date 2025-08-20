@@ -1,6 +1,9 @@
 import type { ApiResponse } from "~/types/api"
 import type { UseFetchOptions } from "~/types/api/auth"
-import type { DetailedExperience, Experience } from "~/types/experiences"
+import type {
+  DetailedExperience,
+  GetUserExperiencesResponse,
+} from "~/types/experiences"
 import type { FetchError } from "ofetch"
 
 export const useExperiencesApi = () => {
@@ -8,10 +11,10 @@ export const useExperiencesApi = () => {
 
   const getUserExperiences = async (
     { userId }: { userId: string },
-    options?: UseFetchOptions<ApiResponse<Experience[]>, FetchError>
+    options?: UseFetchOptions<GetUserExperiencesResponse, FetchError>
   ) => {
-    const res = $useVFetch<ApiResponse<Experience[]>>(
-      `/api/user/${userId}/experiences`,
+    const res = $useVFetch<GetUserExperiencesResponse>(
+      `/api/users/${userId}/experiences`,
       options
     )
     return res

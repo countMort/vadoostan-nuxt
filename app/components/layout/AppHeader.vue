@@ -19,7 +19,7 @@ const {
   title = "",
   backProps = {
     to: routes.experiences.index,
-    onClick: () => {},
+    onClick: undefined,
     back: false,
   },
 } = defineProps<{

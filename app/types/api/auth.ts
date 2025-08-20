@@ -35,8 +35,8 @@ export type VerifyOtpResponse = ApiResponse<{
 }>
 
 export type User = {
-  id: string
-  phoneNumber: string
+  userId: string
+  mobileNumber: string
   firstName: string
   lastName: string
 }

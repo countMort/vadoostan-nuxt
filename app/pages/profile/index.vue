@@ -10,7 +10,7 @@
         authStore.user?.fullName
       }}</span>
       <span class="text-lg text-gray-500 text-end" dir="ltr">{{
-        authStore.user?.phoneNumber || "+۹۸۹۲۱۳۸۴۵۶۲۰"
+        toPersianDigits(authStore.user?.mobileNumber || "")
       }}</span>
     </div>
   </div>
