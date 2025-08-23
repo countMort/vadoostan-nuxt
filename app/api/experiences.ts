@@ -1,4 +1,4 @@
-import type { ApiResponse } from "~/types/api"
+import type { ApiResponse, ExperienceListResponse } from "~/types/api"
 import type { UseFetchOptions } from "~/types/api/auth"
 import type {
   DetailedExperience,
@@ -30,8 +30,20 @@ export const useExperiencesApi = () => {
     )
     return res
   }
+
+  const getExperiences = async (
+    options?: UseFetchOptions<ExperienceListResponse, FetchError>
+  ) => {
+    const res = $useVFetch<ExperienceListResponse>(
+      `/api/user/experiences`,
+      options
+    )
+    return res
+  }
+
   return {
     getUserExperiences,
     getExperience,
+    getExperiences,
   }
 }

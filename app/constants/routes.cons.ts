@@ -14,4 +14,7 @@ export const routes = {
     index: "/profile",
     pastExperiences: "/profile/past-experiences",
   },
+  placeOrder: {
+    index: "/place-order",
+  },
 }

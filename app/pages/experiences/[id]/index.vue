@@ -158,7 +158,13 @@
         <ShoppingBasketPlus :size="7" class="ml-1.5" color="currentColor" />
         شرکت در تجربه
       </QBtn>
-      <QBtn v-else color="positive" text-color="white" class="!rounded-lg">
+      <QBtn
+        v-else
+        color="positive"
+        text-color="white"
+        class="!rounded-lg"
+        @click="onSubmit"
+      >
         <ShoppingBasketCheck :size="7" class="ml-1.5" color="currentColor" />
         تکمیل ثبت‌نام
       </QBtn>
@@ -185,6 +191,7 @@ import { useExperiencesApi } from "~/api/experiences"
 import AppHeader from "~/components/layout/AppHeader.vue"
 import ShoppingBasketPlus from "~/components/icons/ShoppingBasketPlus.vue"
 import ShoppingBasketCheck from "~/components/icons/ShoppingBasketCheck.vue"
+import { routes } from "~/constants/routes.cons"
 defineOptions({ name: "ExperiencePage" })
 definePageMeta({
   middleware: "authenticated",
@@ -198,6 +205,9 @@ const {
   data: { value: { result: experience } = {} },
 } = await getExperience({ experienceId: params.id as string })
 const slide = ref(-1)
+const onSubmit = () => {
+  navigateTo(routes.placeOrder.index)
+}
 
 onMounted(() => {
   slide.value = 0

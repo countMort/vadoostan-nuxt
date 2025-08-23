@@ -18,21 +18,17 @@
 
 <script lang="ts" setup>
 import ExperienceCard from "~/components/experiences/ExperienceCard.vue"
-import type { ExperienceListResponse } from "~/types/api"
-import { apiKeys } from "~/constants/api.cons"
 import type { Experience } from "~/types/experiences"
+import { useExperiencesApi } from "~/api/experiences"
 
 defineOptions({ name: "ExperiencesPage" })
 
-const { data: experiences } = await useAsyncData<ExperienceListResponse>(
-  apiKeys.experiences,
-  () =>
-    $fetch("/api/user/experiences", {
-      params: {
-        status: "published",
-      },
-    })
-)
+const { getExperiences } = useExperiencesApi()
+const { data: experiences } = await getExperiences({
+  params: {
+    status: "published",
+  },
+})
 
 const experiencesByDay = computed(() => {
   return experiences.value?.result.exps.reduce((acc, exp) => {
