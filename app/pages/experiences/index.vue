@@ -1,5 +1,18 @@
 <template>
-  <div class="flex flex-col gap-3 pt-10">
+  <QBtn
+    dense
+    class="!rounded-lg"
+    :class="{
+      '!bg-border !text-[#434343]': !experiencesStore.filters.city,
+    }"
+    @click="experiencesStore.ShowCityFilter = true"
+  >
+    <span class="text-sm font-semibold">{{
+      experiencesStore.filters.city || "شهر"
+    }}</span>
+    <QIcon name="expand_more" color="inherit" size="1.25rem" />
+  </QBtn>
+  <div class="flex flex-col gap-3">
     <template
       v-for="(day, i) in Object.keys(experiencesByDay || {})"
       :key="day"
@@ -14,6 +27,61 @@
       />
     </template>
   </div>
+  <QDialog
+    v-model="experiencesStore.ShowCityFilter"
+    position="bottom"
+    transition-show="slide-up"
+    transition-hide="slide-down"
+  >
+    <QCard class="!w-full !rounded-t-2xl">
+      <div class="relative pt-5 flex justify-center">
+        <QBtn
+          v-close-popup
+          flat
+          icon="close"
+          class="!text-black left-3 absolute"
+          size="sm"
+          dense
+        />
+        <span class="text-xl font-semibold">انتخاب شهر</span>
+      </div>
+      <QCardSection class="grid grid-cols-12 gap-2.5">
+        <QBtn
+          label="تهران"
+          dense
+          :rounded="false"
+          class="!rounded-lg col-span-6"
+          :class="{
+            '!bg-disabled !text-[#434343]':
+              experiencesStore.filters.city !== 'تهران',
+          }"
+          @click="selectCity('تهران')"
+        />
+        <QBtn
+          label="مشهد"
+          dense
+          :rounded="false"
+          class="!rounded-lg col-span-6"
+          :class="{
+            '!bg-disabled !text-[#434343]':
+              experiencesStore.filters.city !== 'مشهد',
+          }"
+          @click="selectCity('مشهد')"
+        />
+        <QBtn
+          label="اصفهان"
+          dense
+          :rounded="false"
+          class="!rounded-lg col-span-6"
+          :class="{
+            '!bg-disabled !text-[#434343]':
+              experiencesStore.filters.city !== 'اصفهان',
+          }"
+          @click="selectCity('اصفهان')"
+        />
+      </QCardSection>
+    </QCard>
+  </QDialog>
 </template>
 
 <script lang="ts" setup>
@@ -21,7 +89,15 @@ import ExperienceCard from "~/components/experiences/ExperienceCard.vue"
 import type { Experience } from "~/types/experiences"
 import { useExperiencesApi } from "~/api/experiences"
 
-defineOptions({ name: "ExperiencesPage" })
+const experiencesStore = useExperiencesStore()
+
+defineOptions({
+  name: "ExperiencesPage",
+})
+
+definePageMeta({
+  appHeader: { title: "تجربه‌ها", backProps: { hide: true } },
+})
 
 const { getExperiences } = useExperiencesApi()
 const { data: experiences } = await getExperiences({
@@ -42,4 +118,9 @@ const experiencesByDay = computed(() => {
     return acc
   }, {} as Record<string, Experience[]>)
 })
+
+const selectCity = (city: string) => {
+  experiencesStore.filters.city = city
+  experiencesStore.ShowCityFilter = false
+}
 </script>

@@ -33,7 +33,7 @@
         </li>
         <li class="flex justify-between">
           <span class="font-semibold">مالیات</span>
-          <span>{{ toPersianDigits(price.toLocaleString()) }} تومان</span>
+          <span>{{ toPersianDigits(tax.toLocaleString()) }} تومان</span>
         </li>
       </ul>
       <QBtn
@@ -41,7 +41,10 @@
         text-color="white"
         class="!w-full !mt-3 !rounded-xl"
         :rounded="false"
-        >پرداخت</QBtn
+        >پرداخت
+        <span class="text-base font-normal mr-1.5"
+          >{{ toPersianDigits(total.toLocaleString()) }} تومان</span
+        ></QBtn
       >
     </footer>
   </div>
@@ -69,6 +72,14 @@ const price = computed(() => {
     experiencesStore.experienceSelection.count *
     (experiencesStore.experienceSelection.experience?.price ?? 0)
   )
+})
+
+const tax = computed(() => {
+  return price.value * 0.1
+})
+
+const total = computed(() => {
+  return price.value + tax.value
 })
 </script>
 

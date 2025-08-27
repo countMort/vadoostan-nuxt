@@ -7,7 +7,7 @@
 }
 
 .q-btn {
-  @apply text-lg
+  @apply text-lg;
 }
 
 .q-field--standout .q-field__control,
@@ -18,6 +18,10 @@
 .q-btn,
 .q-field__control {
   @apply min-h-15;
+}
+
+.q-btn.q-btn--dense {
+  @apply min-h-0;
 }
 
 .q-checkbox__bg {

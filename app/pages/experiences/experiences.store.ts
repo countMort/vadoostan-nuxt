@@ -34,11 +34,18 @@ export const useExperiencesStore = defineStore("experiences", () => {
     experienceSelection.isSelecting = false
   }
 
+  const ShowCityFilter = ref(false)
+  const filters = reactive({
+    city: null as string | null,
+  })
+
   return {
     experienceSelection,
     selectExperience,
     unselectExperience,
     addCountToExperience,
     removeCountFromExperience,
+    ShowCityFilter,
+    filters,
   }
 })

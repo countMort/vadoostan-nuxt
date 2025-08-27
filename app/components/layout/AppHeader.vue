@@ -2,6 +2,7 @@
   <header class="pt-15 text-base">
     <div class="flex items-center gap-2 w-full relative">
       <div
+        v-if="!backProps.hide"
         class="absolute -right-2.25 cursor-pointer rounded-full bg-bg-light w-7 h-7 flex items-center justify-center"
         @click="navigate"
       >
@@ -21,6 +22,7 @@ const {
     to: routes.experiences.index,
     onClick: undefined,
     back: false,
+    hide: false,
   },
 } = defineProps<{
   title?: string
@@ -28,6 +30,7 @@ const {
     to?: string
     onClick?: () => void
     back?: boolean
+    hide?: boolean
   }
 }>()
 

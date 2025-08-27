@@ -211,5 +211,6 @@ const onSubmit = () => {
 
 onMounted(() => {
   slide.value = 0
+  experienceStore.unselectExperience()
 })
 </script>
