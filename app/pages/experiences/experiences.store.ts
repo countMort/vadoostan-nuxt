@@ -1,4 +1,5 @@
 import type { DetailedExperience } from "~/types/experiences"
+import { filters as experiencesFilters } from "~/constants/experiences.cons"
 
 export const useExperiencesStore = defineStore("experiences", () => {
   const experienceSelection = reactive<{
@@ -36,8 +37,14 @@ export const useExperiencesStore = defineStore("experiences", () => {
 
   const ShowCityFilter = ref(false)
   const filters = reactive({
-    city: null as string | null,
+    city: experiencesFilters.city.options[0].value as
+      | (typeof experiencesFilters.city.options)[number]["value"]
+      | null,
   })
+
+  const tempRegisteredExperiences = reactive<
+    { experience: DetailedExperience; count: number }[]
+  >([])
 
   return {
     experienceSelection,
@@ -47,5 +54,6 @@ export const useExperiencesStore = defineStore("experiences", () => {
     removeCountFromExperience,
     ShowCityFilter,
     filters,
+    tempRegisteredExperiences,
   }
 })

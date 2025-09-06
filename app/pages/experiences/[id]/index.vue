@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <AppHeader class="fixed top-0 left-10 right-10 z-10" />
+    <AppHeader class="fixed top-0 left-3 right-3 xs:left-10 xs:right-10 z-10" />
     <QCarousel
       v-model="slide"
       animated
@@ -46,7 +46,7 @@
         />
       </template>
     </QCarousel>
-    <div class="mt-5 px-10 relative">
+    <div class="mt-5 px-3 xs:px-10 relative">
       <div class="font-black mb-2.5">
         {{ experience?.title }}
       </div>
@@ -122,64 +122,81 @@
       </QCard>
     </div>
     <footer
-      class="sticky bottom-0 left-0 right-0 bg-disabled h-20 rounded-t-lg border border-border flex items-center px-10"
+      :class="`sticky bottom-0 left-0 right-0 bg-disabled h-20 rounded-t-lg border
+      border-border flex items-center px-3 xs:px-10`"
     >
-      <QSlideTransition>
-        <div
-          v-if="experienceStore.experienceSelection.isSelecting"
-          class="absolute -top-3 -translate-y-full text-[#434343]"
-        >
+      <template
+        v-if="
+          experienceStore.tempRegisteredExperiences.find(
+            (e) => e.experience.title === experience?.title
+          )
+        "
+      >
+        <QBtn class="!bg-[#79ACE1] text-white !w-full !rounded-lg">
+          <QIcon name="receipt" size="1.75rem" class="ml-2"></QIcon>
+          نمایش بلیت
+        </QBtn>
+      </template>
+      <template v-else>
+        <QSlideTransition>
           <div
-            class="flex items-center justify-center gap-x-3 bg-gray-200 text-lg font-semibold h-15 px-3 rounded-lg"
+            v-if="experienceStore.experienceSelection.isSelecting"
+            class="absolute -top-3 -translate-y-full text-[#434343]"
           >
-            <QIcon
-              name="add"
-              size="1.5rem"
-              @click="experienceStore.addCountToExperience"
-            />
-            <span class="min-w-3">
-              {{
-                toPersianDigits(experienceStore.experienceSelection.count + "")
-              }}
-            </span>
-            <QIcon
-              name="remove"
-              size="1.5rem"
-              @click="experienceStore.removeCountFromExperience"
-            />
+            <div
+              class="flex items-center justify-center gap-x-3 bg-gray-200 text-lg font-semibold h-15 px-3 rounded-lg"
+            >
+              <QIcon
+                name="add"
+                size="1.5rem"
+                @click="experienceStore.addCountToExperience"
+              />
+              <span class="min-w-3">
+                {{
+                  toPersianDigits(
+                    experienceStore.experienceSelection.count + ""
+                  )
+                }}
+              </span>
+              <QIcon
+                name="remove"
+                size="1.5rem"
+                @click="experienceStore.removeCountFromExperience"
+              />
+            </div>
           </div>
-        </div>
-      </QSlideTransition>
-      <QBtn
-        v-if="!experienceStore.experienceSelection.isSelecting"
-        class="flex items-center justify-center !rounded-lg"
-        @click="experienceStore.selectExperience(experience!)"
-      >
-        <ShoppingBasketPlus :size="7" class="ml-1.5" color="currentColor" />
-        شرکت در تجربه
-      </QBtn>
-      <QBtn
-        v-else
-        color="positive"
-        text-color="white"
-        class="!rounded-lg"
-        @click="onSubmit"
-      >
-        <ShoppingBasketCheck :size="7" class="ml-1.5" color="currentColor" />
-        تکمیل ثبت‌نام
-      </QBtn>
-      <div class="mr-1 flex-1 min-w-0 flex items-center justify-end">
-        <span
-          class="font-bold break-words leading-tight text-center"
-          :class="[
+        </QSlideTransition>
+        <QBtn
+          v-if="!experienceStore.experienceSelection.isSelecting"
+          class="flex items-center justify-center !rounded-lg"
+          @click="experienceStore.selectExperience(experience!)"
+        >
+          <ShoppingBasketPlus :size="7" class="ml-1.5" color="currentColor" />
+          شرکت در تجربه
+        </QBtn>
+        <QBtn
+          v-else
+          color="positive"
+          text-color="white"
+          class="!rounded-lg"
+          @click="onSubmit"
+        >
+          <ShoppingBasketCheck :size="7" class="ml-1.5" color="currentColor" />
+          تکمیل ثبت‌نام
+        </QBtn>
+        <div class="mr-1 flex-1 min-w-0 flex items-center justify-end">
+          <span
+            class="font-bold break-words leading-tight text-center"
+            :class="[
             experience!.price > 1000000 && experience!.price % 1000000 !== 0
               ? 'text-sm'
               : 'text-lg',
           ]"
-        >
-          {{ toPersianDigits(formatTomanFull(experience!.price)) }}
-        </span>
-      </div>
+          >
+            {{ toPersianDigits(formatTomanFull(experience!.price)) }}
+          </span>
+        </div>
+      </template>
     </footer>
   </div>
 </template>

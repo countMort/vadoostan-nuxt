@@ -1,10 +1,10 @@
 <template>
   <NuxtLink
     :to="deactive ? undefined : to || routes.experiences.details(experience.id)"
-    class="rounded-lg p-2 shadow-sm flex flex-row bg-white"
+    class="rounded-lg p-2 shadow-sm flex no-wrap bg-white"
   >
     <div
-      class="w-15 h-15 flex items-center justify-center rounded-lg shrink-0 font-extrabold"
+      class="w-15 h-15 flex items-center justify-center rounded-lg shrink-0 font-extrabold self-center"
       :style="{
         backgroundColor: deactive
           ? '#cecece'
@@ -17,7 +17,7 @@
     </div>
     <div class="flex flex-col mr-3.5 justify-center grow">
       <div class="font-black">{{ experience.title }}</div>
-      <div class="flex w-full">
+      <div class="flex w-full gap-y-2 justify-end">
         <div class="text-xs mt-1.5 flex items-center ml-auto">
           محله: {{ experience.address }}
           <DotSeperator :color="deactive ? '#cecece' : undefined" />

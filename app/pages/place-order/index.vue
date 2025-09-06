@@ -1,5 +1,5 @@
 <template>
-  <div class="px-10 h-screen flex flex-col">
+  <div class="px-3 xs:px-10 h-screen flex flex-col">
     <AppHeader title="فاکتور" :back-props="{ back: true }" />
     <section class="flex flex-col gap-4.5">
       <div class="font-bold text-lg mt-14">روش پرداخت</div>
@@ -41,6 +41,7 @@
         text-color="white"
         class="!w-full !mt-3 !rounded-xl"
         :rounded="false"
+        @click="register"
         >پرداخت
         <span class="text-base font-normal mr-1.5"
           >{{ toPersianDigits(total.toLocaleString()) }} تومان</span
@@ -52,6 +53,7 @@
 
 <script setup lang="ts">
 import AppHeader from "~/components/layout/AppHeader.vue"
+import { routes } from "~/constants/routes.cons"
 
 defineOptions({ name: "PlaceOrderPage" })
 definePageMeta({
@@ -81,6 +83,14 @@ const tax = computed(() => {
 const total = computed(() => {
   return price.value + tax.value
 })
+
+const register = () => {
+  experiencesStore.tempRegisteredExperiences.push({
+    experience: experiencesStore.experienceSelection.experience!,
+    count: experiencesStore.experienceSelection.count,
+  })
+  navigateTo(routes.experiences.ticket("01K3NRM88Y1TT4BGFYAAEFCSZK"))
+}
 </script>
 
 <style lang="scss">

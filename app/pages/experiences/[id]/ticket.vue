@@ -1,10 +1,19 @@
 <template>
-  <div class="flex flex-col items-center mb-10.5 font-black text-lg px-2">
+  <div
+    class="flex flex-col items-center mb-10.5 font-black text-lg px-2 text-center"
+  >
     <NuxtImg src="/images/congrats.png" class="w-14 h-14 mb-5.5" />
     ثبت‌نام شما با موفقیت تکمیل شد!
   </div>
   <div class="flex flex-col gap-5.5 px-2">
-    <ExperienceDetailSection title="تجربه" :description="experience?.title" />
+    <ExperienceDetailSection
+      title="تجربه"
+      :description="`${experience?.title} - (${
+        experiencesStore.tempRegisteredExperiences.find(
+          (e) => e.experience.title === experience?.title
+        )?.count || 1
+      } بلیت)`"
+    />
     <ExperienceDetailSection title="مکان" :description="experience?.address" />
     <ExperienceDetailSection title="زمان" :description="dateTimeString" />
     <ExperienceDetailSection title="کد پیگیری" @click="copyCode">
@@ -39,6 +48,8 @@ definePageMeta({
     },
   },
 })
+
+const experiencesStore = useExperiencesStore()
 
 const $q = useQuasar()
 const copyCode = () => {

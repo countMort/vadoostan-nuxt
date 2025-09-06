@@ -11,6 +11,7 @@ body {
 }
 
 @theme {
+  --breakpoint-xs: 25rem;/* 400px */
   --color-bg-light: #fbfbfb;
   --color-bg-dark: #111111;
   --color-primary: var(--q-primary);
