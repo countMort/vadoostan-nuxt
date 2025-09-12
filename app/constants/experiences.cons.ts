@@ -44,22 +44,9 @@ export const statusVariants = {
   pink: "bg-code-05 text-code-5",
 } as const
 
-export const filters = {
+export const defaultExpFilters = {
   city: {
-    label: "شهر",
-    options: [
-      {
-        label: "تهران",
-        value: "tehran",
-      },
-      {
-        label: "مشهد",
-        value: "mashhad",
-      },
-      {
-        label: "اصفهان",
-        value: "esfahan",
-      },
-    ],
+    title: "تهران",
+    id: 1,
   },
-} as const
+}

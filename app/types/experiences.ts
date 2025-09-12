@@ -21,6 +21,7 @@ export enum ExperienceStatus {
 }
 
 export interface DetailedExperience {
+  id: string
   address: string
   date: string
   description: {
@@ -33,6 +34,8 @@ export interface DetailedExperience {
   inclusions: string[]
   price: number
   title: string
+  available: number
+  isUserRegistered: boolean
 }
 
 export interface Director {
@@ -50,4 +53,11 @@ export interface FAQ {
 export type GetUserExperiencesResponse = ApiResponse<{
   count: number
   exps: Experience[]
+}>
+
+export type GetExperienceFiltersResponse = ApiResponse<{
+  cities: {
+    id: number
+    title: string
+  }[]
 }>

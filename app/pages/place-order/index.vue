@@ -85,11 +85,16 @@ const total = computed(() => {
 })
 
 const register = () => {
+  if (!experiencesStore.experienceSelection.experience) return
   experiencesStore.tempRegisteredExperiences.push({
     experience: experiencesStore.experienceSelection.experience!,
     count: experiencesStore.experienceSelection.count,
   })
-  navigateTo(routes.experiences.ticket("01K3NRM88Y1TT4BGFYAAEFCSZK"))
+  navigateTo(
+    routes.experiences.ticket(
+      experiencesStore.experienceSelection.experience!.id
+    )
+  )
 }
 </script>
 

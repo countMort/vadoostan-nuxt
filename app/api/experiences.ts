@@ -2,9 +2,11 @@ import type { ApiResponse, ExperienceListResponse } from "~/types/api"
 import type { UseFetchOptions } from "~/types/api/auth"
 import type {
   DetailedExperience,
+  GetExperienceFiltersResponse,
   GetUserExperiencesResponse,
 } from "~/types/experiences"
 import type { FetchError } from "ofetch"
+import { apiUrls } from "~/constants/api.cons"
 
 export const useExperiencesApi = () => {
   const { $useVFetch } = useNuxtApp()
@@ -41,9 +43,20 @@ export const useExperiencesApi = () => {
     return res
   }
 
+  const getExperienceFilters = async (
+    options?: UseFetchOptions<GetExperienceFiltersResponse, FetchError>
+  ) => {
+    const res = $useVFetch<GetExperienceFiltersResponse>(
+      apiUrls.exp_filters,
+      options
+    )
+    return res
+  }
+
   return {
     getUserExperiences,
     getExperience,
     getExperiences,
+    getExperienceFilters,
   }
 }

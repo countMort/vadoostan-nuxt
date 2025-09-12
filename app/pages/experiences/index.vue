@@ -10,9 +10,7 @@
         @click="experiencesStore.ShowCityFilter = true"
       >
         <span class="text-sm font-semibold">{{
-          filters.city.options.find(
-            (option) => option.value === experiencesStore.filters.city
-          )?.label || "شهر"
+          experiencesStore.filters.city?.title || "شهر"
         }}</span>
         <QIcon name="expand_more" color="inherit" size="1.25rem" />
       </QBtn>
@@ -28,6 +26,7 @@
         v-for="experience in experiencesByDay?.[day] || []"
         :key="experience.id"
         :experience="experience"
+        :filled="experience.isFilled"
       />
     </template>
     <NotFound
@@ -58,17 +57,17 @@
       </div>
       <QCardSection class="grid grid-cols-12 gap-2.5">
         <QBtn
-          v-for="value in filters.city.options"
-          :key="value.value"
-          :label="value.label"
+          v-for="city in filterResponse.result.cities"
+          :key="city.id"
+          :label="city.title"
           dense
           :rounded="false"
           class="!rounded-lg col-span-6 !text-base !py-2.5"
           :class="{
             '!bg-disabled !text-[#434343]':
-              experiencesStore.filters.city !== value.value,
+              experiencesStore.filters.city?.id !== city.id,
           }"
-          @click="selectCity(value.value)"
+          @click="selectCity(city)"
         />
       </QCardSection>
     </QCard>
@@ -77,9 +76,11 @@
 
 <script lang="ts" setup>
 import ExperienceCard from "~/components/experiences/ExperienceCard.vue"
-import type { Experience } from "~/types/experiences"
+import type {
+  Experience,
+  GetExperienceFiltersResponse,
+} from "~/types/experiences"
 import { useExperiencesApi } from "~/api/experiences"
-import { filters } from "~/constants/experiences.cons"
 import NotFound from "~/components/experiences/404.vue"
 
 const experiencesStore = useExperiencesStore()
@@ -92,12 +93,14 @@ definePageMeta({
   appHeader: { title: "تجربه‌ها", backProps: { hide: true } },
 })
 
-const { getExperiences } = useExperiencesApi()
+const { getExperiences, getExperienceFilters } = useExperiencesApi()
 const { data: experiences } = await getExperiences({
   params: {
     status: "published",
+    cityId: computed(() => experiencesStore.filters.city?.id),
   },
 })
+const { data: filterResponse } = await getExperienceFilters({ lazy: true })
 
 const experiencesByDay = computed(() => {
   return experiences.value?.result.exps.reduce((acc, exp) => {
@@ -112,8 +115,10 @@ const experiencesByDay = computed(() => {
   }, {} as Record<string, Experience[]>)
 })
 
-const selectCity = (city: (typeof filters.city.options)[number]["value"]) => {
-  if (experiencesStore.filters.city === city) {
+const selectCity = (
+  city: GetExperienceFiltersResponse["result"]["cities"][number]
+) => {
+  if (experiencesStore.filters.city?.id === city.id) {
     experiencesStore.filters.city = null
   } else {
     experiencesStore.filters.city = city

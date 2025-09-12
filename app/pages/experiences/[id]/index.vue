@@ -5,7 +5,6 @@
         <AppHeader
           class="fixed top-0 left-3 right-3 xs:left-10 xs:right-10 z-10"
         />
-
         <QCarousel
           v-model="slide"
           animated
@@ -176,7 +175,14 @@
           </div>
         </QSlideTransition>
         <QBtn
-          v-if="!experienceStore.experienceSelection.isSelecting"
+          v-if="experience?.available === 0"
+          class="!text-[#434343] !bg-[#DEDEDE] grow-2"
+          :ripple="false"
+        >
+          تکمیل ظرفیت
+        </QBtn>
+        <QBtn
+          v-else-if="!experienceStore.experienceSelection.isSelecting"
           class="flex items-center justify-center !rounded-lg"
           @click="experienceStore.selectExperience(experience!)"
         >

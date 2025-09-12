@@ -5,10 +5,12 @@
   >
     <div
       class="w-15 h-15 flex items-center justify-center rounded-lg shrink-0 font-extrabold self-center"
+      :class="{ 'opacity-30': filled }"
       :style="{
-        backgroundColor: deactive
-          ? '#cecece'
-          : experienceCategories[experience.category]?.color || '#000',
+        backgroundColor:
+          deactive || filled
+            ? '#cecece'
+            : experienceCategories[experience.category]?.color || '#000',
       }"
     >
       {{
@@ -16,9 +18,14 @@
       }}
     </div>
     <div class="flex flex-col mr-3.5 justify-center grow">
-      <div class="font-black">{{ experience.title }}</div>
+      <div class="font-black" :class="{ 'opacity-30': filled }">
+        {{ experience.title }}
+      </div>
       <div class="flex w-full gap-y-2 justify-end">
-        <div class="text-xs mt-1.5 flex items-center ml-auto">
+        <div
+          class="text-xs mt-1.5 flex items-center ml-auto"
+          :class="{ 'opacity-30': filled }"
+        >
           محله: {{ experience.address }}
           <DotSeperator :color="deactive ? '#cecece' : undefined" />
           ساعت:
@@ -31,9 +38,16 @@
         </div>
         <slot v-if="!deactive" name="actions"
           ><div
-            class="text-primary bg-primary/20 text-xs font-bold flex items-center rounded px-2 py-0.25"
+            class="text-xs font-bold flex items-center rounded px-2 py-0.25"
+            :class="{
+              'bg-red-600 text-white': filled,
+              'bg-primary/20 text-primary': !filled,
+            }"
           >
-            {{ experience.price.toLocaleString("fa-IR") }} تومان
+            <template v-if="!filled">
+              {{ experience.price.toLocaleString("fa-IR") }} تومان
+            </template>
+            <template v-else> تکمیل ظرفیت </template>
           </div></slot
         >
       </div>
@@ -47,9 +61,10 @@ import { experienceCategories } from "~/constants/experiences.cons"
 import type { Experience } from "~/types/experiences"
 
 defineOptions({ name: "ExperienceCard" })
-const { experience } = defineProps<{
+const { experience, deactive, filled } = defineProps<{
   experience: Experience
   deactive?: boolean
+  filled?: boolean
   to?: string
 }>()
 </script>
