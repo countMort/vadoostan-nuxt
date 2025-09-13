@@ -73,18 +73,6 @@
           <div class="text-sm">
             {{ experience?.description.main }}
           </div>
-          <QSeparator class="!mt-8 !mb-4" />
-          <div class="font-black mb-2.5">آنچه در تجربه ارائه می‌شود</div>
-          <div class="flex flex-wrap justify-center gap-2.5">
-            <div
-              v-for="(inclusion, index) in experience?.inclusions"
-              :key="`inclusion-${index}`"
-              class="flex flex-col bg-gray-200 rounded-lg w-20 h-20 items-center justify-center text-sm text-center"
-            >
-              <ShoppingBasket class="mb-1.5" />
-              {{ inclusion }}
-            </div>
-          </div>
           <QSeparator class="!my-3.5" />
           <div class="font-black mb-2.5">سوالات متداول</div>
           <div
@@ -218,7 +206,6 @@
 
 <script setup lang="ts">
 import { baseUrl } from "~/constants/api.cons"
-import ShoppingBasket from "~/components/icons/ShoppingBasket.vue"
 import { useExperiencesApi } from "~/api/experiences"
 import AppHeader from "~/components/layout/AppHeader.vue"
 import ShoppingBasketPlus from "~/components/icons/ShoppingBasketPlus.vue"
