@@ -37,41 +37,23 @@
       @another-city="experiencesStore.ShowCityFilter = true"
     />
   </div>
-  <QDialog
-    v-model="experiencesStore.ShowCityFilter"
-    position="bottom"
-    transition-show="slide-up"
-    transition-hide="slide-down"
-  >
-    <QCard class="!w-full !rounded-t-2xl">
-      <div class="relative pt-5 flex justify-center">
-        <QBtn
-          v-close-popup
-          flat
-          icon="close"
-          class="!text-black left-3 absolute"
-          size="sm"
-          dense
-        />
-        <span class="text-xl font-semibold">انتخاب شهر</span>
-      </div>
-      <QCardSection class="grid grid-cols-12 gap-2.5">
-        <QBtn
-          v-for="city in filterResponse.result.cities"
-          :key="city.id"
-          :label="city.title"
-          dense
-          :rounded="false"
-          class="!rounded-lg col-span-6 !text-base !py-2.5"
-          :class="{
-            '!bg-disabled !text-[#434343]':
-              experiencesStore.filters.city?.id !== city.id,
-          }"
-          @click="selectCity(city)"
-        />
-      </QCardSection>
-    </QCard>
-  </QDialog>
+  <VDialog v-model="experiencesStore.ShowCityFilter" title="انتخاب شهر">
+    <QCardSection class="grid grid-cols-12 gap-2.5">
+      <QBtn
+        v-for="city in filterResponse.result.cities"
+        :key="city.id"
+        :label="city.title"
+        dense
+        :rounded="false"
+        class="!rounded-lg col-span-6 !text-base !py-2.5"
+        :class="{
+          '!bg-disabled !text-[#434343]':
+            experiencesStore.filters.city?.id !== city.id,
+        }"
+        @click="selectCity(city)"
+      />
+    </QCardSection>
+  </VDialog>
 </template>
 
 <script lang="ts" setup>

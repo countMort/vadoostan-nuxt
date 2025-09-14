@@ -45,7 +45,7 @@
       />
       <QBtn
         label="ادامه"
-        class="col-span-2 !font-bold !text-lg"
+        class="col-span-2"
         text-color="primary"
         color="secondary"
         rounded

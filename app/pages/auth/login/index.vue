@@ -22,7 +22,7 @@
         rounded
         unelevated
         text-color="primary"
-        class="!w-full mx-auto !font-bold !text-lg"
+        class="!w-full mx-auto !text-lg"
         :loading="loading"
       />
     </QForm>

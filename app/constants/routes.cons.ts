@@ -13,6 +13,9 @@ export const routes = {
   profile: {
     index: "/profile",
     pastExperiences: "/profile/past-experiences",
+    wallet: "/profile/wallet",
+    transactionSuccess: "/profile/wallet/transaction-success",
+    transactionFailed: "/profile/wallet/transaction-failed",
   },
   placeOrder: {
     index: "/place-order",

@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import FavoriteAward from "~/components/icons/FavoriteAward.vue"
 import CustomerSupport from "~/components/icons/CustomerSupport.vue"
+import Wallet from "~/components/icons/Wallet.vue"
 import ProfileIcon from "~/components/icons/Profile.vue"
 import ProfileLink from "~/components/profile/ProfileLink.vue"
 import { routes } from "~/constants/routes.cons"
@@ -43,6 +44,11 @@ const links = [
     title: "تجربیات گذشته",
     to: routes.profile.pastExperiences,
     icon: FavoriteAward,
+  },
+  {
+    title: "کیف پول",
+    to: routes.profile.wallet,
+    icon: Wallet,
   },
   {
     title: "پشتیبانی",

@@ -7,7 +7,7 @@
 }
 
 .q-btn {
-  @apply text-lg;
+  @apply text-lg font-bold;
 }
 
 .q-field--standout .q-field__control,
@@ -34,6 +34,11 @@
 
 .q-field--standout.q-field--highlighted .q-field__control {
   @apply bg-transparent;
+}
+
+
+.q-field--standout.q-field--highlighted .q-field__suffix {
+  @apply !text-black;
 }
 
 .q-field__inner div[role="alert"] {
