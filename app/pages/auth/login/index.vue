@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthApi } from "~/api/auth"
+import { useUserApi } from "~/api/user"
 import { SignType } from "~/types/api/auth"
 import { routes } from "~/constants/routes.cons"
 
@@ -39,9 +39,10 @@ definePageMeta({
   middleware: "not-authenticated",
   appHeader: { title: "ورود", class: "pb-10.5" },
 })
+
 const router = useRouter()
 const state = useLoginStore()
-const { sendCode } = useAuthApi()
+const { sendCode } = useUserApi()
 const otpStore = useOtpStore()
 const loading = ref(false)
 const login = async () => {

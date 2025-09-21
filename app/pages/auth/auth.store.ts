@@ -1,5 +1,5 @@
 import type { RouteLocationNormalizedGeneric } from "vue-router"
-import { useAuthApi } from "~/api/auth"
+import { useUserApi } from "~/api/user"
 import { routes } from "~/constants/routes.cons"
 import type { User } from "~/types/api/auth"
 
@@ -40,7 +40,7 @@ export const useAuthStore = defineStore(
     async function login(mobileNumber: string, otp: string) {
       loading.value = true
       error.value = null
-      const { verifyOtp } = useAuthApi()
+      const { verifyOtp } = useUserApi()
       try {
         const res = await verifyOtp({ mobileNumber, otp, client: "web" })
         if (!res.result.token) throw new Error("No token returned from server")
@@ -67,7 +67,7 @@ export const useAuthStore = defineStore(
     async function fetchUser() {
       if (!token.value) return
       loading.value = true
-      const { fetchUser: fetchUserApi } = useAuthApi()
+      const { fetchUser: fetchUserApi } = useUserApi()
       try {
         const res = await fetchUserApi()
         _user.value = res.result

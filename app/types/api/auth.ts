@@ -42,3 +42,17 @@ export type User = {
 }
 
 export type FetchUserResponse = ApiResponse<User>
+
+export type GetWalletResponse = ApiResponse<{
+  balance: number
+}>
+
+export type WithdrawRequest = {
+  amount: number
+  cardNumber: string
+}
+
+export type WithdrawResponse = ApiResponse<{
+  trackId: string
+  balance: number
+}>

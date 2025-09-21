@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 import { farsiRule } from "~/constants/formRules"
-import { useAuthApi } from "~/api/auth"
+import { useUserApi } from "~/api/user"
 import { SignType } from "~/types/api/auth"
 defineOptions({ name: "RegisterPage" })
 definePageMeta({
@@ -67,7 +67,7 @@ definePageMeta({
   appHeader: { title: "ثبت نام", class: "pb-10.5" },
 })
 const state = useRegisterStore()
-const { sendCode } = useAuthApi()
+const { sendCode } = useUserApi()
 const router = useRouter()
 const otpStore = useOtpStore()
 

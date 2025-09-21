@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import OTP from "~/components/auth/OTP.vue"
-import { useAuthApi } from "~/api/auth"
+import { useUserApi } from "~/api/user"
 import { SignType, type SendCodeRequest } from "~/types/api/auth"
 defineOptions({ name: "OtpPage" })
 definePageMeta({
@@ -38,7 +38,7 @@ const state = useOtpStore()
 const otp = ref<string>("")
 const router = useRouter()
 const authStore = useAuthStore()
-const { sendCode } = useAuthApi()
+const { sendCode } = useUserApi()
 const $q = useQuasar()
 
 onBeforeMount(() => {

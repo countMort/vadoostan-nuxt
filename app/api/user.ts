@@ -4,10 +4,15 @@ import type {
   VerifyOtpRequest,
   VerifyOtpResponse,
   FetchUserResponse,
+  GetWalletResponse,
+  UseFetchOptions,
+  WithdrawRequest,
+  WithdrawResponse,
 } from "~/types/api/auth"
+import type { FetchError } from "ofetch"
 
-export function useAuthApi() {
-  const { $vFetch } = useNuxtApp()
+export function useUserApi() {
+  const { $vFetch, $useVFetch } = useNuxtApp()
   const $q = useQuasar()
   const otpStore = useOtpStore()
 
@@ -38,5 +43,18 @@ export function useAuthApi() {
     return result
   }
 
-  return { sendCode, verifyOtp, fetchUser }
+  function getWallet(options?: UseFetchOptions<GetWalletResponse, FetchError>) {
+    const result = $useVFetch<GetWalletResponse>("/api/wallet", options)
+    return result
+  }
+
+  function withdraw(payload: WithdrawRequest) {
+    const result = $vFetch<WithdrawResponse>("/api/wallet/withdrawals", {
+      method: "POST",
+      body: payload,
+    })
+    return result
+  }
+
+  return { sendCode, verifyOtp, fetchUser, getWallet, withdraw }
 }

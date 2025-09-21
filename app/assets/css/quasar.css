@@ -16,7 +16,8 @@
 }
 
 .q-btn,
-.q-field__control {
+.q-field__control,
+.q-field__control:after {
   @apply min-h-15;
 }
 
@@ -35,7 +36,6 @@
 .q-field--standout.q-field--highlighted .q-field__control {
   @apply bg-transparent;
 }
-
 
 .q-field--standout.q-field--highlighted .q-field__suffix {
   @apply !text-black;

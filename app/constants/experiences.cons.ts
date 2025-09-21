@@ -9,6 +9,10 @@ export const experienceCategories = {
     label: "فیلم",
     color: "#F895A2",
   },
+  science: {
+    label: "علمی",
+    color: "#AEFBDC",
+  },
 }
 
 export const statusDic: Record<

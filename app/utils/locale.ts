@@ -32,3 +32,17 @@ export function formatTomanFull(num: number): string {
 
   return parts.join(" و ") + " تومن"
 }
+
+export function parseFaNumber(str: string): number {
+  const persianDigits = "۰۱۲۳۴۵۶۷۸۹"
+  const arabicDigits = "٠١٢٣٤٥٦٧٨٩"
+
+  const normalized = str
+    // Convert Persian & Arabic digits → English
+    .replace(/[۰-۹]/g, (d) => String(persianDigits.indexOf(d)))
+    .replace(/[٠-٩]/g, (d) => String(arabicDigits.indexOf(d)))
+    // Remove both Persian and Western separators
+    .replace(/[,٬]/g, "")
+
+  return Number(normalized)
+}
