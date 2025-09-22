@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     lang: "fa-IR",
     config: {
       brand: {
+        brand: "#2673BF",
         primary: "#FF7118",
         secondary: "#FAE4D7",
         positive: "#22A957",

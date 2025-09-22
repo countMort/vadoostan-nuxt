@@ -1,5 +1,9 @@
 <template>
-  <QInput v-bind="$attrs" v-model="_model" @update:model-value="normalize" />
+  <QInput
+    v-bind="$attrs"
+    :model-value="_model"
+    @update:model-value="normalize"
+  />
 </template>
 
 <script setup lang="ts">

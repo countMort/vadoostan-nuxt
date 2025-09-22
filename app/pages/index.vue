@@ -1,40 +1,35 @@
 <template>
-  <div class="relative w-full h-screen overflow-hidden">
-    <!-- Background image -->
+  <div
+    :class="`h-screen bg-brand flex flex-col items-center text-[24px] font-black text-white`"
+  >
     <NuxtImg
-      src="/images/splash.png"
-      class="absolute top-0 left-0 w-full h-full object-cover"
+      src="/images/logo.png"
+      class="w-[121px] h-[228px] text-center mb-8 mt-auto"
     />
-
-    <!-- White gradient overlay -->
-    <!-- style="background: linear-gradient(to top, white 20%, transparent 80%)" -->
-
-    <div
-      class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white from-20% to-transparent"
-    />
-
-    <!-- Foreground content -->
-    <div
-      class="absolute bottom-7.5 left-0 w-full text-center font-bold text-xl z-10"
-    >
-      وَ دوستان
-      <br />تجربه‌های حال‌‌خوب‌کن
+    تجربه‌های حال‌‌خوب‌کن
+    <div class="mt-auto text-center rounded-t-2xl bg-white w-full">
       <div
         v-if="!authStore.isAuthenticated"
-        class="flex justify-center mt-4.5 gap-x-3"
+        class="flex justify-center mt-9 gap-x-3"
       >
-        <QBtn label="ثبت نام" to="/auth/register" class="!w-40" />
+        <QBtn
+          label="ثبت نام"
+          to="/auth/register"
+          class="!w-40"
+          text-color="white"
+          color="brand"
+        />
         <QBtn
           label="ورود"
           to="/auth/login"
           text-color="black"
-          class="!bg-disabled !w-40"
+          class="!bg-[#F5F7F6] !w-40"
         />
       </div>
       <br v-if="authStore.isAuthenticated" />
       <NuxtLink
         to="/experiences"
-        class="text-[#585858] font-medium text-sm mt-5"
+        class="text-black font-medium text-sm mt-6 mb-5.5 block"
       >
         لیست تجربه‌ها
       </NuxtLink>

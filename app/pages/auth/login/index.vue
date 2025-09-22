@@ -17,11 +17,11 @@
       />
       <QBtn
         label="ادامه"
-        color="secondary"
         type="submit"
         rounded
         unelevated
-        text-color="primary"
+        text-color="white"
+        color="brand"
         class="!w-full mx-auto !text-lg"
         :loading="loading"
       />

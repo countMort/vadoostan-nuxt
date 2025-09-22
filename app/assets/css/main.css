@@ -11,11 +11,12 @@ body {
 }
 
 @theme {
-  --breakpoint-xs: 25rem;/* 400px */
+  --breakpoint-xs: 25rem; /* 400px */
   --color-bg-light: #fbfbfb;
   --color-bg-dark: #111111;
   --color-primary: var(--q-primary);
   --color-secondary: var(--q-secondary);
+  --color-brand: var(--q-brand);
   --color-bg-input: #f2f2f2;
   --color-positive: var(--q-positive);
   --color-disabled: var(--q-disabled);
@@ -37,4 +38,11 @@ html {
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.text-brand {
+  color: var(--q-brand) !important;
+}
+.bg-brand {
+  background-color: var(--q-brand) !important;
 }

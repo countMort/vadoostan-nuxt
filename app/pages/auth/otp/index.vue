@@ -17,7 +17,12 @@
         state.formattedTime
       }}</span>
     </div>
-    <QBtn :loading="authStore.loading" @click="verifyOtp">
+    <QBtn
+      :loading="authStore.loading"
+      text-color="white"
+      color="brand"
+      @click="verifyOtp"
+    >
       تایید و {{ state.signType === SignType.LOGIN ? "ورود" : "ثبت نام" }}
     </QBtn>
   </div>

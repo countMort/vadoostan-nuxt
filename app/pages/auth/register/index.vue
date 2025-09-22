@@ -46,8 +46,8 @@
       <QBtn
         label="ادامه"
         class="col-span-2"
-        text-color="primary"
-        color="secondary"
+        text-color="white"
+        color="brand"
         rounded
         unelevated
         type="submit"
