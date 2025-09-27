@@ -8,6 +8,7 @@ import type {
   UseFetchOptions,
   WithdrawRequest,
   WithdrawResponse,
+  GetWalletHistoryResponse,
 } from "~/types/api/auth"
 import type { FetchError } from "ofetch"
 
@@ -56,5 +57,22 @@ export function useUserApi() {
     return result
   }
 
-  return { sendCode, verifyOtp, fetchUser, getWallet, withdraw }
+  function getWalletHistory(
+    options?: UseFetchOptions<GetWalletHistoryResponse, FetchError>
+  ) {
+    const result = $useVFetch<GetWalletHistoryResponse>(
+      "/api/wallet/transactions/me",
+      options
+    )
+    return result
+  }
+
+  return {
+    sendCode,
+    verifyOtp,
+    fetchUser,
+    getWallet,
+    withdraw,
+    getWalletHistory,
+  }
 }

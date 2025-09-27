@@ -1,7 +1,15 @@
 <template>
   <header class="mt-7 px-10 flex justify-between items-center">
-    <QIcon name="east" size="1.5rem" @click="router.back()" />
-    <QIcon name="history" size="1.5rem" />
+    <QIcon
+      name="east"
+      size="1.5rem"
+      @click="navigateTo(routes.profile.index, { replace: true })"
+    />
+    <QIcon
+      name="history"
+      size="1.5rem"
+      @click="navigateTo(routes.profile.walletHistory)"
+    />
   </header>
   <main class="mt-18 flex flex-col items-center">
     <div class="text-lg">موجودی کیف‌پول</div>
@@ -142,16 +150,17 @@
 <script setup lang="ts">
 import TransactionResult from "~/components/payments/TransactionResult.vue"
 import { useUserApi } from "~/api/user"
+import { routes } from "~/constants/routes.cons"
 
 defineOptions({ name: "WalletPage" })
 definePageMeta({
   layout: false,
+  middleware: "authenticated",
 })
 const { getWallet, withdraw } = useUserApi()
 const {
   data: { value: { result: wallet } = {} },
 } = await getWallet()
-const router = useRouter()
 const walletStore = useWalletStore()
 const amountOptions = ["300000", "600000", "900000"]
 const submitWithdraw = async () => {

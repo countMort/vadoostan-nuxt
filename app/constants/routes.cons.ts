@@ -16,6 +16,7 @@ export const routes = {
     wallet: "/profile/wallet",
     transactionSuccess: "/profile/wallet/transaction-success",
     transactionFailed: "/profile/wallet/transaction-failed",
+    walletHistory: "/profile/wallet/history",
   },
   placeOrder: {
     index: "/place-order",

@@ -56,3 +56,13 @@ export type WithdrawResponse = ApiResponse<{
   trackId: string
   balance: number
 }>
+
+export type GetWalletHistoryResponse = ApiResponse<{
+  count: number
+  transactions: {
+    amount: number
+    expTitle: string | null
+    type: "withdraw" | "deposit"
+    time: string
+  }[]
+}>
