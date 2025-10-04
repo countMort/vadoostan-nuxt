@@ -61,6 +61,10 @@ export const experienceCategories = {
     label: "زبان",
     color: "#A1C8F6",
   },
+  beauty: {
+    label: "زیبایی",
+    color: "#EFEC9C",
+  },
 }
 
 export const statusDic: Record<
